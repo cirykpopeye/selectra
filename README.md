@@ -5,6 +5,8 @@ A custom select input
 ## Features
 - Supports **multiple**
 - Supports search filter if enabled in option
+- Supports **optgroup**
+- Supports query selector, allows to initiate multiple selects by class
 - Tabbing through input fields still triggers this custom element
 - Easy to setup
 
@@ -19,9 +21,18 @@ Copy both `dist/selectize.js.min.css` and `dist/selectize.js.min.js`
 ## Usage
 ### HTML
 ```html
-<select id="custom-select" class="form-control">
+<select id="custom-select" class="form-control" multiple>
   <option value="option1">Option 1</option>
   <option value="option2">Option 2</option>
+</select>
+```
+or
+```html
+<select id="custom-select" class="form-control">
+  <optgroup label="Option group">
+    <option value="option1">Option 1</option>
+    <option value="option2">Option 2</option>
+  </optgroup>
 </select>
 ```
 ### Via a bundler
