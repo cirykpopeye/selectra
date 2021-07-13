@@ -1,5 +1,5 @@
 const path = require('path')
-const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
 
 module.exports = (env, argv) => {
   const config = {
@@ -22,7 +22,7 @@ module.exports = (env, argv) => {
           generator: {
             filename: 'selectize.js.min.css'
           },
-          use: ['sass-loader']
+          use: ['postcss-loader', 'sass-loader']
         }
       ]
     },

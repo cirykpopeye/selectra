@@ -1,14 +1,13 @@
 .selectize-js-element {
-  border: 0!important;
-  clip: rect(0 0 0 0)!important;
-  -webkit-clip-path: inset(50%)!important;
-  clip-path: inset(50%)!important;
-  height: 1px!important;
-  overflow: hidden!important;
-  padding: 0!important;
-  position: absolute!important;
-  width: 1px!important;
-  white-space: nowrap!important;
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
 }
 
 .selectize-js-option-group-label {
@@ -19,8 +18,8 @@
 
 .selectize-js-options {
   opacity: 0;
-  transition: 300ms ease-in-out;
   pointer-events: none;
+  transition: 300ms ease-in-out;
 
   &.open {
     opacity: 1;
@@ -29,48 +28,48 @@
 }
 
 .selectize-js-container {
-  position: relative;
   min-width: 300px;
+  position: relative;
   width: max-content;
+}
 
-  .selectize-js-options {
-    background: #eee;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
-    border-radius: 4px;
-    overflow-x: hidden;
-    width: 100%;
-    padding: 1rem;
-    z-index: 1;
-    max-height: 300px;
-    overflow-y: scroll;
+.selectize-js-options {
+  background: #eee;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 1rem;
+  width: 100%;
+  z-index: 1;
 
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: #888;
-    }
-    
-    &::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
+  &::-webkit-scrollbar {
+    width: 6px;
   }
-
-  .selectize-js-option {
-    padding: 0.3rem 1rem;
-    margin-bottom: 4px;
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
   }
-
-  .selectize-js-option[data-selected="true"],
-  .selectize-js-option:hover {
-    background: #ddd;
-    border-radius: 4px;
+  
+  &::-webkit-scrollbar-thumb {
+    background: #888;
   }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.selectize-js-option {
+  margin-bottom: 4px;
+  padding: 0.3rem 1rem;
+}
+
+.selectize-js-option[data-selected='true'],
+.selectize-js-option:hover {
+  background: #ddd;
+  border-radius: 4px;
 }
 
 .selectize-js-btn,

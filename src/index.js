@@ -8,8 +8,8 @@ class SelectizeElement {
       search = false,
       langInputPlaceholder = 'Search',
       langEmptyValuePlaceholder = 'Pick a value'
-   } = {}
-   ) {
+    } = {}
+  ) {
     this.search = search
     this.element = element
     this.id = id.replace(/[#.]/g, '')
@@ -23,14 +23,16 @@ class SelectizeElement {
     this.addClass()
     this.addCustomSelector()
   }
+
   addClass () {
     this.element.classList.add('selectize-js-element')
   }
+
   addCustomSelector () {
     this.element.insertAdjacentHTML('afterend', `
       <div class="selectize-js-container" id="${this.id}-container">
         ${this.search ? (`<input class="${[...this.classes, 'selectize-js-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" id="${this.id}-handler" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectize-js-btn'].join(' ')}" id="${this.id}-handler">${this.getCurrentLabel()}</button>`)}
-        <div class="selectize-js-options" id="${this.id}-options">${this.renderOptions()}</div>
+        <div class="selectize-js-options" id="${this.id}-options">${this.getOptionsHTML()}</div>
       </div>
     `)
     this.handler = this.element.parentElement.querySelector(`#${this.id}-handler`)
@@ -49,11 +51,13 @@ class SelectizeElement {
     })
     this.addListeners()
   }
+
   addListeners () {
     this.addShowHideListener()
     this.optionsListener()
     this.filterListener()
   }
+
   addShowHideListener () {
     this.element.addEventListener('focus', () => {
       this.handler.focus()
@@ -68,6 +72,7 @@ class SelectizeElement {
       }
     })
   }
+
   optionsListener () {
     this.options.querySelectorAll('.selectize-js-option').forEach(option => {
       option.addEventListener('click', () => {
@@ -75,6 +80,7 @@ class SelectizeElement {
       })
     })
   }
+
   filterListener () {
     this.handler.addEventListener('input', () => {
       const optionElements = document.getElementById(`${this.id}-options`)
@@ -93,6 +99,7 @@ class SelectizeElement {
       this.optionsListener()
     })
   }
+
   selectValue (value) {
     if (this.multiple) {
       // Toggle selected for this element
@@ -114,6 +121,7 @@ class SelectizeElement {
     this.setCurrentLabel()
     this.hideOptions()
   }
+
   getCurrentLabel () {
     const options = this.getOptions(this.element, true)
     if (this.multiple && Array.from(this.element.selectedOptions).length) {
@@ -128,20 +136,24 @@ class SelectizeElement {
     }
     return this.langEmptyValuePlaceholder
   }
+
   setCurrentLabel () {
     this.element.parentElement.querySelector(`#${this.id}-handler`).innerText = this.getCurrentLabel()
   }
+
   showOptions () {
     this.handler.value = ''
     this.options.classList.add('open')
     this.popperInstance.update()
   }
+
   hideOptions () {
     this.handler.value = this.getCurrentLabel()
     this.options.innerHTML = this.getOptionsHTML()
     this.optionsListener()
     this.options.classList.remove('open')
   }
+
   getOptionsHTML (options = this.getOptions()) {
     let html = ''
     for (const option of options) {
@@ -158,10 +170,7 @@ class SelectizeElement {
     }
     return html
   }
-  renderOptions () {
-    const options = this.getOptions(this.element)
-    return this.getOptionsHTML()
-  }
+
   getOptions (element = this.element, flat = false) {
     const options = []
     const optionElements = element.querySelectorAll('optgroup, option')
@@ -184,6 +193,7 @@ class SelectizeElement {
     return options
   }
 }
+
 class Selectize {
   constructor (selector, config = {}) {
     this.config = config
@@ -192,8 +202,10 @@ class Selectize {
     this.elements = document.querySelectorAll(selector)
     this.init()
   }
+
   init () {
     this.elements.forEach(element => {
+      /* eslint-disable no-new */
       new SelectizeElement(element, `${this.selector}-${this.counter}`, this.config)
       this.counter++
     })
