@@ -1,3 +1,5 @@
+import { createPopper } from '@popperjs/core'
+
 class SelectizeElement {
   constructor (
     element,
@@ -33,6 +35,18 @@ class SelectizeElement {
     `)
     this.handler = this.element.parentElement.querySelector(`#${this.id}-handler`)
     this.options = this.element.parentElement.querySelector(`#${this.id}-options`)
+
+    this.popperInstance = createPopper(this.handler, this.options, {
+      placement: 'bottom-start',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 10]
+          }
+        }
+      ]
+    })
     this.addListeners()
   }
   addListeners () {
@@ -120,6 +134,7 @@ class SelectizeElement {
   showOptions () {
     this.handler.value = ''
     this.options.classList.add('open')
+    this.popperInstance.update()
   }
   hideOptions () {
     this.handler.value = this.getCurrentLabel()
