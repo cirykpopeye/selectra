@@ -1,3 +1,5 @@
+> NPM package link https://www.npmjs.com/package/@cirykpopeye/selectize.js
+
 # Selectize.js
 Vanilla JS Select2 replacement, no jQuery components just pure JS.
 A custom select input
