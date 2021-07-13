@@ -4,16 +4,14 @@ class Selectize {
   constructor (selector, config = {}) {
     this.config = config
     this.selector = selector
-    this.counter = 1
-    this.elements = document.querySelectorAll(selector)
-    this.init()
   }
 
   init () {
-    this.elements.forEach(element => {
-      const selectizeElement = new SelectizeElement(element, `${this.selector}-${this.counter}`, this.config)
+    let counter = 0
+    document.querySelectorAll(this.selector).forEach(element => {
+      const selectizeElement = new SelectizeElement(element, `${this.selector}-${counter}`, this.config)
       selectizeElement.init()
-      this.counter++
+      counter++
     })
   }
 }

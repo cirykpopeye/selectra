@@ -24,6 +24,7 @@ class SelectizeElement {
   init () {
     this.addClass()
     this.addCustomSelector()
+    this.addListeners()
   }
 
   addClass () {
@@ -52,7 +53,6 @@ class SelectizeElement {
         }
       ]
     })
-    this.addListeners()
   }
 
   addListeners () {
