@@ -4,7 +4,7 @@ module.exports = {
   entry: ['./src/index.js', './src/scss/index.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'selectify.js.min.js'
+    filename: 'selectize.js.min.js'
   },
   module: {
     rules: [
@@ -18,7 +18,7 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/resource',
         generator: {
-          filename: 'selectify.js.min.css'
+          filename: 'selectize.js.min.css'
         },
         use: ['sass-loader']
       }

@@ -6,64 +6,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Selectize.js example</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="./selectify.js.min.css">
+  <link rel="stylesheet" href="./selectize.js.min.css">
 </head>
 <body>
   <div class="container">
     <h1>Selectize.js example</h1>
-    <p>
-      <label for="selectCustom">Gender</label>
-      <select name="" id="selectCustom" class="btn btn-primary">
-        <option value="M" selected>Male</option>
-        <option value="F">Female</option>
-        <option value="X">X</option>
-      </select>
-    </p>
-    <p>
-      <label for="selectCustomSearch">Category</label>
-      <select name="" id="selectCustomSearch" class="form-control">
-        <optgroup label="Active categories">
-          <option value="cat1" selected>Category 1</option>
-          <option value="cat2">Category 2</option>
-          <option value="cat3">Category 3</option>
-          <option value="cat4">Category 4</option>
-          <option value="cat5">Category 5</option>
-          <option value="cat6">Category 6</option>
-        </optgroup>
-        <optgroup label="Inactive categories" class="form-control">
-          <option value="cat7">Category 7</option>
-          <option value="cat8">Category 8</option>
-          <option value="cat9">Category 9</option>
-          <option value="cat10">Category 10</option>
-          <option value="cat11">Category 11</option>
-          <option value="cat12">Category 12</option>
-          <option value="cat13">Category 13</option>
-        </optgroup>
-      </select>
-    </p>
-    <p>
-      <label for="selectCustomSearch">Categories</label>
-      <select name="" id="selectCustomMultiple" class="form-control" multiple>
-        <optgroup label="Active categories">
-          <option value="cat1" selected>Category 1</option>
-          <option value="cat2" selected>Category 2</option>
-        </optgroup>
-        <optgroup label="Inactive categories">
-          <option value="cat3">Category 3</option>
-          <option value="cat4">Category 4</option>
-        </optgroup>
-      </select>
-    </p>
+    <form>
+      <p>
+        <label for="selectCustom">Gender</label>
+        <select name="" id="selectCustom" class="btn btn-secondary" required>
+          <option value="M" selected>Male</option>
+          <option value="F">Female</option>
+          <option value="X">X</option>
+        </select>
+      </p>
+      <p>
+        <label for="selectCustomSearch">Category</label>
+        <select name="" id="selectCustomSearch" class="form-control" required>
+          <optgroup label="Active categories">
+            <option value="cat1" selected>Category 1</option>
+            <option value="cat2">Category 2</option>
+            <option value="cat3">Category 3</option>
+            <option value="cat4">Category 4</option>
+            <option value="cat5">Category 5</option>
+            <option value="cat6">Category 6</option>
+          </optgroup>
+          <optgroup label="Inactive categories" class="form-control">
+            <option value="cat7">Category 7</option>
+            <option value="cat8">Category 8</option>
+            <option value="cat9">Category 9</option>
+            <option value="cat10">Category 10</option>
+            <option value="cat11">Category 11</option>
+            <option value="cat12">Category 12</option>
+            <option value="cat13">Category 13</option>
+          </optgroup>
+        </select>
+      </p>
+      <p>
+        <label for="selectCustomSearch">Categories</label>
+        <select name="" id="selectCustomMultiple" class="form-control" required multiple>
+          <optgroup label="Active categories">
+            <option value="cat1" selected>Category 1</option>
+            <option value="cat2" selected>Category 2</option>
+          </optgroup>
+          <optgroup label="Inactive categories">
+            <option value="cat3">Category 3</option>
+            <option value="cat4">Category 4</option>
+          </optgroup>
+        </select>
+      </p>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
   
-  <script src="./selectify.js.min.js"></script>
+  <script src="./selectize.js.min.js"></script>
   <script>
     new Selectize('#selectCustom')
     new Selectize('#selectCustomSearch', {
-      search: true
+      search: true,
+      langInputPlaceholder: 'Search a category'
     })
     new Selectize('#selectCustomMultiple', {
-      search: true
+      search: true,
+      langInputPlaceholder: 'Search a category',
+      langEmptyValuePlaceholder: 'Choose one or more categories'
     })
   </script>
 </body>
