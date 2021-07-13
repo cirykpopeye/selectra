@@ -1,4 +1,4 @@
-import { createPopper } from '@popperjs/core/lib/popper-lite'
+import { createPopper } from '@popperjs/core'
 
 class SelectizeElement {
   constructor (
@@ -43,6 +43,7 @@ class SelectizeElement {
       modifiers: [
         {
           name: 'offset',
+          enabled: true,
           options: {
             offset: [0, 10]
           }
