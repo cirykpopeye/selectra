@@ -39,14 +39,21 @@ or
 ```
 ### Via a bundler
 ```js
-import Selectize from 'cirykpopeye/selectize.js'
+import Selectize from '@cirykpopeye/selectize.js'
 
 new Selectize('#custom-select')
+```
+```scss
+@import "@cirykpopeye/selectize.js/src/scss/index.scss"
 ```
 
 ### Via script import
 
 ```html
+<head>
+  <link rel="stylesheet" href="../dist/selectify.js.min.css">
+</head>
+...
 <script src="../dist/selectify.js.min.js"></script>
 <script>
   new Selectize('#custom-select', {
@@ -56,9 +63,9 @@ new Selectize('#custom-select')
 ```
 
 ## Options
-| Option | Description |
-| ------ | ----------- |
-| search | Transforms the button into a input field, on click options open and can be searched |
+| Option | Value | Description |
+| ------ | ----- | ----------- |
+| search | true/false | Transforms the button into a input field, on click options open and can be searched |
 
 ## Example
 View the example in the `example` directory, it uses the `dist` files inside the repo.
