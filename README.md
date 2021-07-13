@@ -44,7 +44,8 @@ or
 ```js
 import Selectize from '@cirykpopeye/selectize.js'
 
-new Selectize('#custom-select')
+const customSelect = new Selectize('#custom-select')
+customSelect.init()
 ```
 ```scss
 @import "@cirykpopeye/selectize.js/src/scss/index.scss"
@@ -59,9 +60,10 @@ new Selectize('#custom-select')
 ...
 <script src="../dist/selectify.js.min.js"></script>
 <script>
-  new Selectize('#custom-select', {
+  const  customSelect = new Selectize('#custom-select', {
     search: true
   })
+  customSelect.init()
 </script>
 ```
 
