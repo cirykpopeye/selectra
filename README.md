@@ -55,10 +55,10 @@ customSelect.init()
 
 ```html
 <head>
-  <link rel="stylesheet" href="../dist/selectify.js.min.css">
+  <link rel="stylesheet" href="<path-to-assets>/selectify.js.min.css">
 </head>
 ...
-<script src="../dist/selectify.js.min.js"></script>
+<script src="<path-to-assets>/selectify.js.min.js"></script>
 <script>
   const  customSelect = new Selectize('#custom-select', {
     search: true
