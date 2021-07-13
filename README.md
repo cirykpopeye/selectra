@@ -12,6 +12,9 @@ A custom select input
 - Tabbing through input fields still triggers this custom element
 - Easy to setup
 
+## Demo
+You can view a demo using the latest files on https://cirykpopeye.github.io/selectize.js/
+
 ## Installation
 ### Package manager
 ```bash
