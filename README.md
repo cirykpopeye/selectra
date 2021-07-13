@@ -68,4 +68,4 @@ new Selectize('#custom-select')
 | search | true/false | Transforms the button into a input field, on click options open and can be searched |
 
 ## Example
-View the example in the `example` directory, it uses the `dist` files inside the repo.
+View the demo in the `demo` directory, it uses the `dist` files inside the repo.
