@@ -13,7 +13,7 @@ A custom select input
 ## Installation
 ### Package manager
 ```bash
-npm install cirykpopeye/selectize.js
+npm install @cirykpopeye/selectize.js
 ```
 ### Manual
 Copy both `dist/selectize.js.min.css` and `dist/selectize.js.min.js`

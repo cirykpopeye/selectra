@@ -1,11 +1,14 @@
 {
   "name": "@cirykpopeye/selectify.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "repository": "https://github.com/cirykpopeye/selectize.js",
   "author": "Ciryk Popeye",
   "license": "MIT",
-  "keywords": ["select", "vanilla"],
+  "keywords": [
+    "select",
+    "vanilla"
+  ],
   "devDependencies": {
     "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
