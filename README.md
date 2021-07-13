@@ -68,7 +68,6 @@ new Selectize('#custom-select')
 ## Options
 | Option | Value | Description |
 | ------ | ----- | ----------- |
-| search | true/false | Transforms the button into a input field, on click options open and can be searched |
-
-## Example
-View the demo in the `demo` directory, it uses the `dist` files inside the repo.
+| search | boolean | Transforms the button into a input field, on click options open and can be searched |
+| langInputPlaceholder | string | Sets the translated value for input. **Default: Search** |
+| langEmptyValuePlaceholder | string | Sets the translated value if option yet to be selected. **Default: Pick a value** |

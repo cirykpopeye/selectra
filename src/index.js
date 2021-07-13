@@ -1,10 +1,23 @@
 class SelectizeElement {
-  constructor (element, id, { search = false } = {}) {
+  constructor (
+    element,
+    id,
+    {
+      search = false,
+      langInputPlaceholder = 'Search',
+      langEmptyValuePlaceholder = 'Pick a value'
+   } = {}
+   ) {
     this.search = search
     this.element = element
     this.id = id.replace(/[#.]/g, '')
     this.multiple = element.hasAttribute('multiple')
     this.classes = Array.from(this.element.classList)
+
+    // Translations
+    this.langInputPlaceholder = langInputPlaceholder
+    this.langEmptyValuePlaceholder = langEmptyValuePlaceholder
+
     this.addClass()
     this.addCustomSelector()
   }
@@ -14,7 +27,7 @@ class SelectizeElement {
   addCustomSelector () {
     this.element.insertAdjacentHTML('afterend', `
       <div class="selectize-js-container" id="${this.id}-container">
-        ${this.search ? (`<input class="${[...this.classes, 'selectize-js-input'].join(' ')}" placeholder="Zoeken" id="${this.id}-handler" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectize-js-btn'].join(' ')}" id="${this.id}-handler">${this.getCurrentLabel()}</button>`)}
+        ${this.search ? (`<input class="${[...this.classes, 'selectize-js-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" id="${this.id}-handler" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectize-js-btn'].join(' ')}" id="${this.id}-handler">${this.getCurrentLabel()}</button>`)}
         <div class="selectize-js-options" id="${this.id}-options">${this.renderOptions()}</div>
       </div>
     `)
@@ -99,7 +112,7 @@ class SelectizeElement {
       })
       if (option) return option.label
     }
-    return 'Kies een waarde'
+    return this.langEmptyValuePlaceholder
   }
   setCurrentLabel () {
     this.element.parentElement.querySelector(`#${this.id}-handler`).innerText = this.getCurrentLabel()
