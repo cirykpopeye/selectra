@@ -61,16 +61,21 @@
   
   <script src="./selectize.js.min.js"></script>
   <script>
-    new Selectize('#selectCustom')
-    new Selectize('#selectCustomSearch', {
+    const customSelectize = new Selectize('#selectCustom')
+    customSelectize.init()
+
+    const selectCustomSearch = new Selectize('#selectCustomSearch', {
       search: true,
       langInputPlaceholder: 'Search a category'
     })
-    new Selectize('#selectCustomMultiple', {
+    selectCustomSearch.init()
+
+    const selectCustomMultiple = new Selectize('#selectCustomMultiple', {
       search: true,
       langInputPlaceholder: 'Search a category',
       langEmptyValuePlaceholder: 'Choose one or more categories'
     })
+    selectCustomMultiple.init()
   </script>
 </body>
 </html>
