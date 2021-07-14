@@ -61,21 +61,23 @@
   
   <script src="./selectize.js.min.js"></script>
   <script>
+    // Using selectize directly
     const customSelectize = new Selectize('#selectCustom')
     customSelectize.init()
 
+    // Selectize with config
     const selectCustomSearch = new Selectize('#selectCustomSearch', {
       search: true,
       langInputPlaceholder: 'Search a category'
     })
     selectCustomSearch.init()
 
-    const selectCustomMultiple = new Selectize('#selectCustomMultiple', {
+    // Selectize by function
+    createSelectize('#selectCustomMultiple', {
       search: true,
       langInputPlaceholder: 'Search a category',
       langEmptyValuePlaceholder: 'Choose one or more categories'
     })
-    selectCustomMultiple.init()
   </script>
 </body>
 </html>

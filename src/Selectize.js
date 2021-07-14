@@ -7,11 +7,9 @@ class Selectize {
   }
 
   init () {
-    let counter = 0
     document.querySelectorAll(this.selector).forEach(element => {
-      const selectizeElement = new SelectizeElement(element, `${this.selector}-${counter}`, this.config)
+      const selectizeElement = new SelectizeElement(element, this.config)
       selectizeElement.init()
-      counter++
     })
   }
 }

@@ -3,7 +3,6 @@ import { createPopper } from '@popperjs/core'
 class SelectizeElement {
   constructor (
     element,
-    id,
     {
       search = false,
       langInputPlaceholder = 'Search',
@@ -12,7 +11,6 @@ class SelectizeElement {
   ) {
     this.search = search
     this.element = element
-    this.id = id.replace(/[#.]/g, '')
     this.multiple = element.hasAttribute('multiple')
     this.classes = Array.from(this.element.classList)
 
@@ -32,14 +30,15 @@ class SelectizeElement {
   }
 
   addCustomSelector () {
-    this.element.insertAdjacentHTML('afterend', `
-      <div class="selectize-js-container" id="${this.id}-container">
-        ${this.search ? (`<input class="${[...this.classes, 'selectize-js-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" id="${this.id}-handler" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectize-js-btn'].join(' ')}" id="${this.id}-handler">${this.getCurrentLabel()}</button>`)}
-        <div class="selectize-js-options" id="${this.id}-options">${this.getOptionsHTML()}</div>
-      </div>
+    this.customSelector = document.createElement('div')
+    this.customSelector.insertAdjacentHTML('afterbegin', `
+      ${this.search ? (`<input class="${[...this.classes, 'selectize-handler', 'selectize-js-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectize-handler', 'selectize-js-btn'].join(' ')}">${this.getCurrentLabel()}</button>`)}
+      <div class="selectize-js-options">${this.getOptionsHTML()}</div>
     `)
-    this.handler = this.element.parentElement.querySelector(`#${this.id}-handler`)
-    this.options = this.element.parentElement.querySelector(`#${this.id}-options`)
+    this.customSelector.classList.add('selectize-js-container')
+    this.element.insertAdjacentElement('afterend', this.customSelector)
+    this.handler = this.customSelector.querySelector('.selectize-handler')
+    this.options = this.customSelector.querySelector('.selectize-js-options')
 
     this.popperInstance = createPopper(this.handler, this.options, {
       placement: 'bottom-start',
@@ -69,8 +68,7 @@ class SelectizeElement {
       this.showOptions()
     })
     document.addEventListener('click', e => {
-      const clickTarget = document.querySelector(`#${this.id}-container`)
-      if (!e.composedPath().includes(clickTarget)) {
+      if (!e.composedPath().includes(this.customSelector)) {
         this.hideOptions()
       }
     })
@@ -86,7 +84,6 @@ class SelectizeElement {
 
   filterListener () {
     this.handler.addEventListener('input', () => {
-      const optionElements = document.getElementById(`${this.id}-options`)
       const options = this.getOptions().map(option => {
         if ('options' in option) {
           option.options = option.options.filter(opt => {
@@ -98,7 +95,7 @@ class SelectizeElement {
         if ('options' in option) return option.options.length > 0
         return option.label.toLowerCase().trim().includes(this.handler.value.toLowerCase().trim())
       })
-      optionElements.innerHTML = this.getOptionsHTML(options)
+      this.options.innerHTML = this.getOptionsHTML(options)
       this.optionsListener()
     })
   }
@@ -141,7 +138,7 @@ class SelectizeElement {
   }
 
   setCurrentLabel () {
-    this.element.parentElement.querySelector(`#${this.id}-handler`).innerText = this.getCurrentLabel()
+    this.handler.innerText = this.getCurrentLabel()
   }
 
   showOptions () {
