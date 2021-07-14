@@ -1,1 +1,80 @@
-.selectize-js-element{border:0 !important;clip:rect(0 0 0 0) !important;-webkit-clip-path:inset(50%) !important;clip-path:inset(50%) !important;height:1px !important;overflow:hidden !important;padding:0 !important;position:absolute !important;white-space:nowrap !important;width:1px !important}.selectize-js-option-group-label{display:block;font-weight:bold;margin-bottom:.5rem}.selectize-js-options{opacity:0;pointer-events:none;transition:300ms ease-in-out}.selectize-js-options.open{opacity:1;pointer-events:all}.selectize-js-container{min-width:300px;position:relative;width:-webkit-max-content;width:-moz-max-content;width:max-content}.selectize-js-options{background:#eee;border-radius:4px;box-shadow:3px 3px 3px rgba(0,0,0,.16);max-height:300px;overflow-x:hidden;overflow-y:scroll;padding:1rem;width:100%;z-index:1}.selectize-js-options::-webkit-scrollbar{width:6px}.selectize-js-options::-webkit-scrollbar-track{background:#f1f1f1}.selectize-js-options::-webkit-scrollbar-thumb{background:#888}.selectize-js-options::-webkit-scrollbar-thumb:hover{background:#555}.selectize-js-option{margin-bottom:4px;padding:.3rem 1rem}.selectize-js-option[data-selected=true],.selectize-js-option:hover{background:#ddd;border-radius:4px}.selectize-js-btn,.selectize-js-input{cursor:pointer}.selectize-js-option{cursor:pointer}
+.selectize-js-element {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  -webkit-clip-path: inset(50%) !important;
+          clip-path: inset(50%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+.selectize-js-option-group-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.selectize-js-options {
+  opacity: 0;
+  pointer-events: none;
+  transition: 300ms ease-in-out;
+}
+.selectize-js-options.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.selectize-js-container {
+  min-width: 300px;
+  position: relative;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.selectize-js-options {
+  background: #eee;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 1rem;
+  width: 100%;
+  z-index: 1;
+}
+.selectize-js-options::-webkit-scrollbar {
+  width: 6px;
+}
+.selectize-js-options::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.selectize-js-options::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.selectize-js-options::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.selectize-js-option {
+  margin-bottom: 4px;
+  padding: 0.3rem 1rem;
+}
+
+.selectize-js-option[data-selected=true],
+.selectize-js-option:hover {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.selectize-js-btn,
+.selectize-js-input {
+  cursor: pointer;
+}
+
+.selectize-js-option {
+  cursor: pointer;
+}
