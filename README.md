@@ -42,10 +42,14 @@ or
 ```
 ### Via a bundler
 ```js
-import Selectize from '@cirykpopeye/selectize.js'
+import Selectize, { createSelectize } from '@cirykpopeye/selectize.js'
 
 const customSelect = new Selectize('#custom-select')
 customSelect.init()
+
+// or
+
+createSelectize('#custom-select')
 ```
 ```scss
 @import "@cirykpopeye/selectize.js/src/scss/index.scss"
@@ -64,6 +68,11 @@ customSelect.init()
     search: true
   })
   customSelect.init()
+
+  // or
+  createSelectize('#custom-select', {
+    search: true
+  })
 </script>
 ```
 
