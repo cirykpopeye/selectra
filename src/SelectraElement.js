@@ -23,6 +23,21 @@ class SelectraElement {
     this.addClass()
     this.addCustomSelector()
     this.addListeners()
+    this.addCustomValueMethod()
+  }
+
+  addCustomValueMethod () {
+    Object.defineProperty(this.element, 'val', {
+      value: this.getValue.bind(this),
+      configurable: true
+    })
+  }
+
+  getValue () {
+    if (this.multiple) {
+      return Array.from(this.element.selectedOptions).map(selectedOption => selectedOption.value)
+    }
+    return this.element.value
   }
 
   addClass () {

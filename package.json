@@ -1,5 +1,5 @@
 {
-  "name": "@ciryk/selectra",
+  "name": "selectra",
   "version": "1.0.0",
   "main": "src/index.js",
   "repository": "https://github.com/cirykpopeye/selectra.js",
@@ -10,12 +10,14 @@
     "vanilla"
   ],
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
     "autoprefixer": "^10.3.1",
     "eslint": "^7.12.1",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
+    "jest": "^27.0.6",
     "postcss": "^8.3.5",
     "postcss-loader": "^6.1.1",
     "sass": "^1.35.2",
@@ -30,7 +32,8 @@
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development --watch",
     "eslint": "eslint src/**/*.js",
-    "stylelint": "stylelint src/scss/**/*.scss"
+    "stylelint": "stylelint src/scss/**/*.scss",
+    "test": "jest"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2"

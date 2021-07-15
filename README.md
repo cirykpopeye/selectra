@@ -1,4 +1,4 @@
-> NPM package link https://www.npmjs.com/package/@ciryk/selectra
+> NPM package link https://www.npmjs.com/package/selectra
 
 # Selectra
 Vanilla JS Select2 replacement, no jQuery components just pure JS.
@@ -18,7 +18,7 @@ You can view a demo using the latest files on https://cirykpopeye.github.io/sele
 ## Installation
 ### Package manager
 ```bash
-npm install @ciryk/selectra
+npm install selectra
 ```
 ### Manual
 Copy both `dist/selectra.min.css` and `dist/selectra.min.js`
@@ -42,7 +42,7 @@ or
 ```
 ### Via a bundler
 ```js
-import Selectra, { createSelectra } from '@ciryk/selectra'
+import Selectra, { createSelectra } from 'selectra'
 
 const customSelect = new Selectra('#custom-select')
 customSelect.init()
@@ -52,7 +52,14 @@ customSelect.init()
 createSelectra('#custom-select')
 ```
 ```scss
-@import "@ciryk/selectra/src/scss/index.scss"
+@import "selectra/src/scss/index.scss"
+```
+
+### To fetch the value
+```js
+// Will return option1, or ['option1', 'option2'] if multiple and both selected
+document.querySelector('#custom-select').val() 
+// document.querySelector('#custom-select').value can still be used, though with multiple .selectedOptions should be used, .val() simplifies this
 ```
 
 ### Via script import
