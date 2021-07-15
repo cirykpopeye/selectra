@@ -20,6 +20,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "jest": "^27.0.6",
+    "jest-transform-stub": "^2.0.0",
     "postcss": "^8.3.5",
     "postcss-loader": "^6.1.1",
     "sass": "^1.35.2",
