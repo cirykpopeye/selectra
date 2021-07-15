@@ -1,8 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
-    "jest/globals": true
+    es2021: true
   },
   extends: [
     'standard'
@@ -12,5 +11,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-  }
+  },
+  plugins: [
+    'jest'
+  ]
 }

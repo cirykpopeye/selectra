@@ -1,5 +1,6 @@
 const path = require('path')
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = (env, argv) => {
   const config = {
@@ -11,9 +12,13 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.svg$/,
+          use: ['svg-inline-loader']
+        },
+        {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: []
+          use: ['eslint-loader']
         },
         {
           test: /\.scss$/,
@@ -26,7 +31,11 @@ module.exports = (env, argv) => {
         }
       ]
     },
-    plugins: []
+    plugins: [
+      new StylelintPlugin({
+        files: './src/scss/**/*.scss'
+      })
+    ]
   }
   if (argv.mode === 'development') {
     config.plugins.push(new WebpackBundleAnalyzer())

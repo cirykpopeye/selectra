@@ -1,4 +1,6 @@
 import { createPopper } from '@popperjs/core'
+import dropdown from './assets/dropdown.svg'
+import trash from './assets/trash.svg'
 
 class SelectraElement {
   constructor (
@@ -24,6 +26,11 @@ class SelectraElement {
     this.addCustomSelector()
     this.addListeners()
     this.addCustomValueMethod()
+    this.adaptColors()
+  }
+
+  adaptColors () {
+    this.handlerIcon.style.fill = window.getComputedStyle(this.handler).color
   }
 
   addCustomValueMethod () {
@@ -47,12 +54,17 @@ class SelectraElement {
   addCustomSelector () {
     this.customSelector = document.createElement('div')
     this.customSelector.insertAdjacentHTML('afterbegin', `
-      ${this.search ? (`<input class="${[...this.classes, 'selectra-handler', 'selectra-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectra-handler', 'selectra-btn'].join(' ')}">${this.getCurrentLabel()}</button>`)}
       <div class="selectra-options">${this.getOptionsHTML()}</div>
+      <div class="selectra-handler-container">
+        ${this.search ? (`<input class="${[...this.classes, 'selectra-handler', 'selectra-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectra-handler', 'selectra-btn'].join(' ')}">${this.getCurrentLabel()}</button>`)}
+        <span class="selectra-handler-icon">${dropdown}</span>
+      </div>
     `)
     this.customSelector.classList.add('selectra-container')
     this.element.insertAdjacentElement('afterend', this.customSelector)
+    this.handlerContainer = this.customSelector.querySelector('.selectra-handler-container')
     this.handler = this.customSelector.querySelector('.selectra-handler')
+    this.handlerIcon = this.customSelector.querySelector('.selectra-handler-icon')
     this.options = this.customSelector.querySelector('.selectra-options')
 
     this.popperInstance = createPopper(this.handler, this.options, {
@@ -180,7 +192,11 @@ class SelectraElement {
           </div>
         `
       } else {
-        html += `<div class="selectra-option" data-value="${option.value}" data-selected="${option.selected}">${option.label}</div>`
+        html += `
+          <div class="selectra-option" data-value="${option.value}" data-selected="${option.selected}">
+            ${option.label}
+            ${option.selected && this.multiple ? '<span class="selectra-option-icon">' + trash + '</span>' : ''}
+          </div>`
       }
     }
     return html

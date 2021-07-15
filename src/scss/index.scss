@@ -80,3 +80,49 @@
 .selectra-option {
   cursor: pointer;
 }
+
+.selectra-handler-container {
+  position: relative;
+  width: max-content;
+}
+
+.selectra-handler {
+  padding-right: 2rem;
+}
+
+.selectra-handler-icon {
+  pointer-events: none;
+  position: absolute;
+  right: 0.5rem;
+  top: 5px;
+  transition: 300ms ease-in-out;
+  width: 20px;
+}
+
+.selectra-options.open + .selectra-handler-container .selectra-handler-icon {
+  transform: translateY(2px) rotateZ(180deg);
+}
+
+.selectra-option {
+  padding-right: 2rem;
+  position: relative;
+}
+
+.selectra-option-icon {
+  opacity: 0;
+  position: absolute;
+  right: 0.5rem;
+  top: 3px;
+  transform: translateX(10px);
+  transition: 300ms ease-in-out;
+  width: 20px;
+}
+
+.selectra-option:hover .selectra-option-icon {
+  opacity: 1;
+  transform: none;
+}
+
+.selectra-handler-icon svg {
+  fill: inherit;
+}
