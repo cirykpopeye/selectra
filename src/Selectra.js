@@ -1,6 +1,6 @@
-import SelectizeElement from './SelectizeElement'
+import SelectraElement from './SelectraElement'
 
-class Selectize {
+class Selectra {
   constructor (selector, config = {}) {
     this.config = config
     this.selector = selector
@@ -8,10 +8,10 @@ class Selectize {
 
   init () {
     document.querySelectorAll(this.selector).forEach(element => {
-      const selectizeElement = new SelectizeElement(element, this.config)
-      selectizeElement.init()
+      const selectraElement = new SelectraElement(element, this.config)
+      selectraElement.init()
     })
   }
 }
 
-export default Selectize
+export default Selectra

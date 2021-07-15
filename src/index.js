@@ -1,10 +1,10 @@
-import Selectize from './Selectize'
+import Selectra from './Selectra'
 
-export const createSelectize = (selector, config = {}) => {
-  const selectizeInstance = new Selectize(selector, config)
-  selectizeInstance.init()
+export const createSelectra = (selector, config = {}) => {
+  const selectraInstance = new Selectra(selector, config)
+  selectraInstance.init()
 }
 
 // Bind to window
-window.Selectize = Selectize
-window.createSelectize = createSelectize
+window.Selectra = Selectra
+window.createSelectra = createSelectra

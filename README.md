@@ -1,6 +1,6 @@
-> NPM package link https://www.npmjs.com/package/@cirykpopeye/selectize.js
+> NPM package link https://www.npmjs.com/package/@ciryk/selectra
 
-# Selectize.js
+# Selectra
 Vanilla JS Select2 replacement, no jQuery components just pure JS.
 A custom select input
 
@@ -13,15 +13,15 @@ A custom select input
 - Easy to setup
 
 ## Demo
-You can view a demo using the latest files on https://cirykpopeye.github.io/selectize.js/
+You can view a demo using the latest files on https://cirykpopeye.github.io/selectra/
 
 ## Installation
 ### Package manager
 ```bash
-npm install @cirykpopeye/selectize.js
+npm install @ciryk/selectra
 ```
 ### Manual
-Copy both `dist/selectize.js.min.css` and `dist/selectize.js.min.js`
+Copy both `dist/selectra.min.css` and `dist/selectra.min.js`
 
 ## Usage
 ### HTML
@@ -42,35 +42,35 @@ or
 ```
 ### Via a bundler
 ```js
-import Selectize, { createSelectize } from '@cirykpopeye/selectize.js'
+import Selectra, { createSelectra } from '@ciryk/selectra'
 
-const customSelect = new Selectize('#custom-select')
+const customSelect = new Selectra('#custom-select')
 customSelect.init()
 
 // or
 
-createSelectize('#custom-select')
+createSelectra('#custom-select')
 ```
 ```scss
-@import "@cirykpopeye/selectize.js/src/scss/index.scss"
+@import "@ciryk/selectra/src/scss/index.scss"
 ```
 
 ### Via script import
 
 ```html
 <head>
-  <link rel="stylesheet" href="<path-to-assets>/selectify.js.min.css">
+  <link rel="stylesheet" href="<path-to-assets>/selectra.min.css">
 </head>
 ...
-<script src="<path-to-assets>/selectify.js.min.js"></script>
+<script src="<path-to-assets>/selectra.min.js"></script>
 <script>
-  const  customSelect = new Selectize('#custom-select', {
+  const  customSelect = new Selectra('#custom-select', {
     search: true
   })
   customSelect.init()
 
   // or
-  createSelectize('#custom-select', {
+  createSelectra('#custom-select', {
     search: true
   })
 </script>

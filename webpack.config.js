@@ -1,12 +1,12 @@
 const path = require('path')
-const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (env, argv) => {
   const config = {
     entry: ['./src/index.js', './src/scss/index.scss'],
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'selectize.js.min.js'
+      filename: 'selectra.min.js'
     },
     module: {
       rules: [
@@ -20,7 +20,7 @@ module.exports = (env, argv) => {
           exclude: /node_modules/,
           type: 'asset/resource',
           generator: {
-            filename: 'selectize.js.min.css'
+            filename: 'selectra.min.css'
           },
           use: ['postcss-loader', 'sass-loader']
         }

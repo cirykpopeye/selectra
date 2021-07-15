@@ -1,4 +1,4 @@
-.selectize-js-element {
+.selectra-element {
   border: 0 !important;
   clip: rect(0 0 0 0) !important;
   clip-path: inset(50%) !important;
@@ -10,13 +10,13 @@
   width: 1px !important;
 }
 
-.selectize-js-option-group-label {
+.selectra-option-group-label {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.selectize-js-options {
+.selectra-options {
   opacity: 0;
   pointer-events: none;
   transition: 300ms ease-in-out;
@@ -27,13 +27,13 @@
   }
 }
 
-.selectize-js-container {
+.selectra-container {
   min-width: 300px;
   position: relative;
   width: max-content;
 }
 
-.selectize-js-options {
+.selectra-options {
   background: #eee;
   border-radius: 4px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.16);
@@ -61,22 +61,22 @@
   }
 }
 
-.selectize-js-option {
+.selectra-option {
   margin-bottom: 4px;
   padding: 0.3rem 1rem;
 }
 
-.selectize-js-option[data-selected='true'],
-.selectize-js-option:hover {
+.selectra-option[data-selected='true'],
+.selectra-option:hover {
   background: #ddd;
   border-radius: 4px;
 }
 
-.selectize-js-btn,
-.selectize-js-input {
+.selectra-btn,
+.selectra-input {
   cursor: pointer;
 }
 
-.selectize-js-option {
+.selectra-option {
   cursor: pointer;
 }

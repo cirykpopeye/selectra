@@ -1,6 +1,6 @@
 import { createPopper } from '@popperjs/core'
 
-class SelectizeElement {
+class SelectraElement {
   constructor (
     element,
     {
@@ -26,19 +26,19 @@ class SelectizeElement {
   }
 
   addClass () {
-    this.element.classList.add('selectize-js-element')
+    this.element.classList.add('selectra-element')
   }
 
   addCustomSelector () {
     this.customSelector = document.createElement('div')
     this.customSelector.insertAdjacentHTML('afterbegin', `
-      ${this.search ? (`<input class="${[...this.classes, 'selectize-handler', 'selectize-js-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectize-handler', 'selectize-js-btn'].join(' ')}">${this.getCurrentLabel()}</button>`)}
-      <div class="selectize-js-options">${this.getOptionsHTML()}</div>
+      ${this.search ? (`<input class="${[...this.classes, 'selectra-handler', 'selectra-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectra-handler', 'selectra-btn'].join(' ')}">${this.getCurrentLabel()}</button>`)}
+      <div class="selectra-options">${this.getOptionsHTML()}</div>
     `)
-    this.customSelector.classList.add('selectize-js-container')
+    this.customSelector.classList.add('selectra-container')
     this.element.insertAdjacentElement('afterend', this.customSelector)
-    this.handler = this.customSelector.querySelector('.selectize-handler')
-    this.options = this.customSelector.querySelector('.selectize-js-options')
+    this.handler = this.customSelector.querySelector('.selectra-handler')
+    this.options = this.customSelector.querySelector('.selectra-options')
 
     this.popperInstance = createPopper(this.handler, this.options, {
       placement: 'bottom-start',
@@ -75,7 +75,7 @@ class SelectizeElement {
   }
 
   optionsListener () {
-    this.options.querySelectorAll('.selectize-js-option').forEach(option => {
+    this.options.querySelectorAll('.selectra-option').forEach(option => {
       option.addEventListener('click', () => {
         this.selectValue(option.dataset.value)
       })
@@ -159,13 +159,13 @@ class SelectizeElement {
     for (const option of options) {
       if ('options' in option) {
         html += `
-          <div class="selectize-js-option-group">
-            <span class="selectize-js-option-group-label">${option.label}</span>
+          <div class="selectra-option-group">
+            <span class="selectra-option-group-label">${option.label}</span>
             ${this.getOptionsHTML(option.options)}
           </div>
         `
       } else {
-        html += `<div class="selectize-js-option" data-value="${option.value}" data-selected="${option.selected}">${option.label}</div>`
+        html += `<div class="selectra-option" data-value="${option.value}" data-selected="${option.selected}">${option.label}</div>`
       }
     }
     return html
@@ -194,4 +194,4 @@ class SelectizeElement {
   }
 }
 
-export default SelectizeElement
+export default SelectraElement
