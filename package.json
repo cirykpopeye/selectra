@@ -28,6 +28,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-sass-guidelines": "^8.0.0",
     "stylelint-webpack-plugin": "^2.2.2",
+    "svg-inline-loader": "^0.8.2",
     "webpack": "^5.44.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.2"
@@ -40,7 +41,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@popperjs/core": "^2.9.2",
-    "svg-inline-loader": "^0.8.2"
+    "@popperjs/core": "^2.9.2"
   }
 }
