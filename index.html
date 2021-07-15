@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selectize.js example</title>
+  <title>Selectra example</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="./selectize.js.min.css">
+  <link rel="stylesheet" href="./selectra.min.css">
 </head>
 <body>
   <div class="container">
-    <h1>Selectize.js example</h1>
+    <h1>Selectra example</h1>
     <form>
       <p>
         <label for="selectCustom">Gender</label>
@@ -59,21 +59,21 @@
     </form>
   </div>
   
-  <script src="./selectize.js.min.js"></script>
+  <script src="./selectra.min.js"></script>
   <script>
-    // Using selectize directly
-    const customSelectize = new Selectize('#selectCustom')
-    customSelectize.init()
+    // Using selectra directly
+    const customSelectra = new Selectra('#selectCustom')
+    customSelectra.init()
 
-    // Selectize with config
-    const selectCustomSearch = new Selectize('#selectCustomSearch', {
+    // Selectra with config
+    const selectCustomSearch = new Selectra('#selectCustomSearch', {
       search: true,
       langInputPlaceholder: 'Search a category'
     })
     selectCustomSearch.init()
 
-    // Selectize by function
-    createSelectize('#selectCustomMultiple', {
+    // Selectra by function
+    createSelectra('#selectCustomMultiple', {
       search: true,
       langInputPlaceholder: 'Search a category',
       langEmptyValuePlaceholder: 'Choose one or more categories'
