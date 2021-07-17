@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Selectra example</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <link rel="stylesheet" href="./selectra.min.css">
 </head>
 <body>
@@ -82,6 +83,26 @@
         <select id="selectPopulatedGroupsMultiple" class="form-control" multiple></select>
       </p>
       <button type="submit" class="btn btn-primary">Submit</button>
+
+      <div id="vue-app">
+        <h2>Vue integration</h2>
+        <p>
+          <label for="vueCategory">Category</label>
+          <select id="vueCategory" class="form-control" v-model="value">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+          </select>
+          {{ value }}
+        </p>
+        <p>
+          <label for="vueCategories">Categories</label>
+          <select id="vueCategories" class="form-control" v-model="values" multiple>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+          </select>
+          {{ values }}
+        </p>
+      </div>
     </form>
   </div>
   
@@ -169,6 +190,21 @@
           ]
         }
       ]
+    })
+
+    // Vue part
+    new Vue({
+      el: '#vue-app',
+      mounted () {
+        createSelectra('#vueCategory')
+        createSelectra('#vueCategories')
+      },
+      data () {
+        return {
+          value: false,
+          values: ['option1', 'option2']
+        }
+      }
     })
   </script>
 </body>
