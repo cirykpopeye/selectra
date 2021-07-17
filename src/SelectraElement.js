@@ -26,6 +26,7 @@ class SelectraElement {
 
   init () {
     this.addOptions()
+    this.markAsSelected()
     this.addClass()
     this.addCustomSelector()
     this.addListeners()
@@ -43,6 +44,12 @@ class SelectraElement {
         }
       }
     }
+  }
+
+  markAsSelected () {
+    Array.from(this.element.selectedOptions).forEach(option => {
+      option.selected = true
+    })
   }
 
   addGroup (group) {
@@ -77,7 +84,7 @@ class SelectraElement {
 
   getValue () {
     if (this.multiple) {
-      return Array.from(this.element.selectedOptions).map(selectedOption => selectedOption.value)
+      return Array.from(this.element.options).filter(option => option.selected).map(selectedOption => selectedOption.value)
     }
     return this.element.value
   }
@@ -182,36 +189,45 @@ class SelectraElement {
   }
 
   selectValue (value) {
+    // Get current value
+    const currentValue = this.multiple ? [...this.getValue()] : this.getValue()
     if (this.multiple) {
-      // Toggle selected for this element
-      const valueOption = Array.from(this.element.options).find(option => {
-        return option.value === value
+      // Remove selected from all of the items
+      Array.from(this.element.options).forEach((option) => {
+        option.selected = false
       })
-      if (valueOption.hasAttribute('selected')) {
-        valueOption.removeAttribute('selected')
+
+      // Find value in currentValue
+      const valueIndex = currentValue.indexOf(value)
+      if (valueIndex !== -1) {
+        currentValue.splice(valueIndex, 1)
       } else {
-        valueOption.setAttribute('selected', true)
+        // Add current value
+        currentValue.push(value)
       }
-      const options = []
-      Array.from(this.element.selectedOptions).forEach(selectedOption => {
-        options.push(selectedOption.value)
-      })
+
+      // Add selected for remaining items
+      for (const value of currentValue) {
+        this.element.querySelector('option[value="' + value + '"]').selected = true
+      }
     } else {
       this.element.value = value
     }
+    this.element.dispatchEvent(new Event('change'))
     this.setCurrentLabel()
     this.hideOptions()
   }
 
   getCurrentLabel () {
     const options = this.getOptions(this.element, true)
-    if (this.multiple && Array.from(this.element.selectedOptions).length) {
-      return Array.from(this.element.selectedOptions).map(selectedOption => {
-        return selectedOption.innerHTML
-      }).join(', ')
+    const value = this.getValue()
+    if (this.multiple && value.length) {
+      return Array.from(this.element.options).filter(option => {
+        return value.includes(option.value)
+      }).map(option => option.innerHTML).join(', ')
     } else {
       const option = options.find(option => {
-        return option.value === this.element.value
+        return option.value === value
       })
       if (option) return option.label
     }
@@ -263,9 +279,9 @@ class SelectraElement {
       if (optionElement.parentElement !== element && !flat) return
       if (optionElement.tagName === 'OPTION') {
         options.push({
-          value: optionElement.getAttribute('value'),
+          value: optionElement.value,
           label: optionElement.innerHTML,
-          selected: this.multiple ? optionElement.selected : this.element.value === optionElement.getAttribute('value'),
+          selected: this.multiple ? optionElement.selected : this.element.value === optionElement.value,
           disabled: !!optionElement.disabled
         })
       } else if (!flat && optionElement.tagName === 'OPTGROUP') {
