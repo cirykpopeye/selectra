@@ -89,3 +89,16 @@ document.querySelector('#custom-select').val()
 | search | boolean | Transforms the button into a input field, on click options open and can be searched |
 | langInputPlaceholder | string | Sets the translated value for input. **Default: Search** |
 | langEmptyValuePlaceholder | string | Sets the translated value if option yet to be selected. **Default: Pick a value** |
+
+## CSS / SCSS variables
+| SCSS variable | CSS variable | Default value |
+| ------------- | ------------ | ------------- |
+| $selectra-container-min-width | --selectra-container-min-width | 300px |
+| $selectra-options-bg | --selectra-options-bg | #eee |
+| $selectra-options-max-height | --selectra-options-max-height | 300px |
+| $selectra-options-scrollbar-width | --selectra-options-scrollbar-width | 6px |
+| $selectra-options-scrollbar-track-color | --selectra-options-scrollbar-track-color | #f1f1f1 |
+| $selectra-options-scrollbar-thumb-color | --selectra-options-scrollbar-thumb-color | #888 |
+| $selectra-options-scrollbar-thumb-hover-color | --selectra-options-scrollbar-thumb-hover-color | #555 |
+| $selectra-options-shadow | --selectra-options-shadow | 3px 3px 3px rgba(0, 0, 0, 0.16) |
+| $selectra-options-border-radius | --selectra-options-border-radius | 4px |
