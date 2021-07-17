@@ -77,7 +77,7 @@ class SelectraElement {
 
   addCustomValueMethod () {
     Object.defineProperty(this.element, 'val', {
-      value: this.getValue.bind(this),
+      value: (val) => val ? this.setValue.bind(this)(val) : this.getValue.bind(this)(),
       configurable: true
     })
   }
@@ -87,6 +87,25 @@ class SelectraElement {
       return Array.from(this.element.options).filter(option => option.selected).map(selectedOption => selectedOption.value)
     }
     return this.element.value
+  }
+
+  setValue (val) {
+    if (this.multiple) {
+      Array.from(this.element.options).forEach((option) => {
+        option.selected = false
+      })
+      // Add selected for remaining items
+      if (Array.isArray(val)) {
+        for (const value of val) {
+          this.selectValue(value)
+        }
+      } else {
+        this.selectValue(val)
+      }
+    } else {
+      this.element.value = val
+    }
+    this.setCurrentLabel()
   }
 
   addClass () {
