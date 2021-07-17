@@ -11,6 +11,7 @@ A custom select input
 - Supports query selector, allows to initiate multiple selects by class
 - Tabbing through input fields still triggers this custom element
 - Easy to setup
+- Works with frameworks such as VueJS, example included in demo
 
 ## Demo
 You can view a demo using the latest files on https://cirykpopeye.github.io/selectra/
@@ -60,6 +61,13 @@ createSelectra('#custom-select')
 // Will return option1, or ['option1', 'option2'] if multiple and both selected
 document.querySelector('#custom-select').val() 
 // document.querySelector('#custom-select').value can still be used, though with multiple .selectedOptions should be used, .val() simplifies this
+```
+
+### To set the value
+```js
+document.querySelector('#custom-select').val('option1') 
+// or for multiple
+document.querySelector('#custom-select').val(['option1', 'option2']) 
 ```
 
 ### Via script import
