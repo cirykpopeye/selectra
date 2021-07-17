@@ -51,9 +51,6 @@ class SelectraElement {
     for (const option of group.options) {
       this.addOption(groupElement, option)
     }
-    console.log({
-      groupElement
-    })
     this.element.insertAdjacentElement(
       'beforeend',
       groupElement

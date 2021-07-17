@@ -184,3 +184,61 @@ describe('disabled select with search', () => {
     expect(document.querySelector('.selectra-options').classList.contains('open')).toBe(false)
   })
 })
+
+describe('add options programmatically', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <select id="test-select"></select>
+    `
+    createSelectra('#test-select', {
+      options: [
+        { value: 'option1', label: 'Option 1' },
+        { value: 'option2', label: 'Option 2' },
+        { value: 'option3', label: 'Option 3', disabled: true },
+        { value: 'option4', label: 'Option 4', selected: true }
+      ]
+    })
+  })
+
+  test('check if options are properly generated', () => {
+    const selectraContainer = document.querySelector('.selectra-container')
+    expect(selectraContainer.querySelectorAll('.selectra-option').length).toBe(4)
+    expect(selectraContainer.querySelectorAll('.selectra-option:not([data-disabled="true"])').length).toBe(3)
+    expect(document.querySelector('#test-select').val()).toBe('option4')
+  })
+})
+
+
+
+describe('add option groups programmatically', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <select id="test-select" multiple></select>
+    `
+    createSelectra('#test-select', {
+      options: [
+        {
+          label: 'Group 1',
+          options: [
+            { value: 'option1', label: 'Option 1' },
+            { value: 'option2', label: 'Option 2', selected: true }
+          ]
+        },
+        {
+          label: 'Group 2',
+          options: [
+            { value: 'option3', label: 'Option 3', disabled: true },
+            { value: 'option4', label: 'Option 4', selected: true }
+          ]
+        }
+      ]
+    })
+  })
+
+  test('check if options are properly generated', () => {
+    const selectraContainer = document.querySelector('.selectra-container')
+    expect(selectraContainer.querySelectorAll('.selectra-option').length).toBe(4)
+    expect(selectraContainer.querySelectorAll('.selectra-option:not([data-disabled="true"])').length).toBe(3)
+    expect(document.querySelector('#test-select').val()).toStrictEqual(['option2', 'option4'])
+  })
+})
