@@ -8,7 +8,8 @@ class SelectraElement {
     {
       search = false,
       langInputPlaceholder = 'Search',
-      langEmptyValuePlaceholder = 'Pick a value'
+      langEmptyValuePlaceholder = 'Pick a value',
+      options = false
     }
   ) {
     this.search = search
@@ -16,6 +17,7 @@ class SelectraElement {
     this.multiple = element.multiple
     this.disabled = element.disabled
     this.classes = Array.from(this.element.classList)
+    this.options = options
 
     // Translations
     this.langInputPlaceholder = langInputPlaceholder
@@ -23,11 +25,46 @@ class SelectraElement {
   }
 
   init () {
+    this.addOptions()
     this.addClass()
     this.addCustomSelector()
     this.addListeners()
     this.addCustomValueMethod()
     this.adaptColors()
+  }
+
+  addOptions () {
+    if (this.options) {
+      for (const option of this.options) {
+        if ('options' in option) {
+          this.addGroup(option)
+        } else {
+          this.addOption(this.element, option)
+        }
+      }
+    }
+  }
+
+  addGroup (group) {
+    const groupElement = document.createElement('optgroup')
+    groupElement.setAttribute('label', group.label)
+    for (const option of group.options) {
+      this.addOption(groupElement, option)
+    }
+    console.log({
+      groupElement
+    })
+    this.element.insertAdjacentElement(
+      'beforeend',
+      groupElement
+    )
+  }
+
+  addOption (element, option) {
+    element.insertAdjacentHTML(
+      'beforeend',
+      `<option value="${option.value}" ${option.selected ? 'selected' : ''} ${option.disabled ? 'disabled' : ''}>${option.label}</option>`
+    )
   }
 
   adaptColors () {
@@ -85,9 +122,9 @@ class SelectraElement {
     this.handlerContainer = this.customSelector.querySelector('.selectra-handler-container')
     this.handler = this.customSelector.querySelector('.selectra-handler')
     this.handlerIcon = this.customSelector.querySelector('.selectra-handler-icon')
-    this.options = this.customSelector.querySelector('.selectra-options')
+    this.optionsElement = this.customSelector.querySelector('.selectra-options')
 
-    this.popperInstance = createPopper(this.handler, this.options, {
+    this.popperInstance = createPopper(this.handler, this.optionsElement, {
       placement: 'bottom-start',
       modifiers: [
         {
@@ -122,7 +159,7 @@ class SelectraElement {
   }
 
   optionsListener () {
-    this.options.querySelectorAll('.selectra-option:not([data-disabled="true"])').forEach(option => {
+    this.optionsElement.querySelectorAll('.selectra-option:not([data-disabled="true"])').forEach(option => {
       option.addEventListener('click', () => {
         this.selectValue(option.dataset.value)
       })
@@ -142,7 +179,7 @@ class SelectraElement {
         if ('options' in option) return option.options.length > 0
         return option.label.toLowerCase().trim().includes(this.handler.value.toLowerCase().trim())
       })
-      this.options.innerHTML = this.getOptionsHTML(options)
+      this.optionsElement.innerHTML = this.getOptionsHTML(options)
       this.optionsListener()
     })
   }
@@ -190,15 +227,15 @@ class SelectraElement {
 
   showOptions () {
     this.handler.value = ''
-    this.options.classList.add('open')
+    this.optionsElement.classList.add('open')
     this.popperInstance.update()
   }
 
   hideOptions () {
     this.handler.value = this.getCurrentLabel()
-    this.options.innerHTML = this.getOptionsHTML()
+    this.optionsElement.innerHTML = this.getOptionsHTML()
     this.optionsListener()
-    this.options.classList.remove('open')
+    this.optionsElement.classList.remove('open')
   }
 
   getOptionsHTML (options = this.getOptions()) {

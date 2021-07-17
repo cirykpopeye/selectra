@@ -83,12 +83,43 @@ document.querySelector('#custom-select').val()
 </script>
 ```
 
+## Set options programmatically
+```js
+createSelectra('#custom-select', {
+  options: [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' }
+  ]
+})
+
+// or optgroups
+createSelectra('#custom-select', {
+  options: [
+    {
+      label: 'Group 1',
+      options: [
+        { value: 'option1', label: 'Option 1' },
+        { value: 'option2', label: 'Option 2' }
+      ]
+    },
+    {
+      label: 'Group 2',
+      options: [
+        { value: 'option3', label: 'Option 3' },
+        { value: 'option4', label: 'Option 4' }
+      ]
+    }
+  ]
+})
+```
+
 ## Options
 | Option | Value | Description |
 | ------ | ----- | ----------- |
 | search | boolean | Transforms the button into a input field, on click options open and can be searched |
 | langInputPlaceholder | string | Sets the translated value for input. **Default: Search** |
 | langEmptyValuePlaceholder | string | Sets the translated value if option yet to be selected. **Default: Pick a value** |
+| options | array | Array of options, or option groups
 
 ## CSS / SCSS variables
 | SCSS variable | CSS variable | Default value |

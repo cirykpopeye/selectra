@@ -69,6 +69,18 @@
           </optgroup>
         </select>
       </p>
+      <p>
+        <label for="selectPopulated">Populated by JS</label>
+        <select id="selectPopulated" class="form-control"></select>
+      </p>
+      <p>
+        <label for="selectPopulatedGroups">Populated by JS using optgroup</label>
+        <select id="selectPopulatedGroups" class="form-control"></select>
+      </p>
+      <p>
+        <label for="selectPopulatedGroupsMultiple">Populated by JS using optgroup and multiple</label>
+        <select id="selectPopulatedGroupsMultiple" class="form-control" multiple></select>
+      </p>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
@@ -98,6 +110,65 @@
       search: true,
       langInputPlaceholder: 'Search a category',
       langEmptyValuePlaceholder: 'Choose one or more categories'
+    })
+
+    createSelectra('#selectPopulated', {
+      options: [
+        {
+          value: 'option1',
+          label: 'Option 1'
+        },
+        {
+          value: 'option2',
+          label: 'Option 2'
+        },
+        {
+          value: 'option3',
+          label: 'Option 3',
+          selected: true
+        },
+        {
+          value: 'option4',
+          label: 'Option 4',
+          disabled: true
+        }
+      ]
+    })
+    createSelectra('#selectPopulatedGroups', {
+      options: [
+        {
+          label: 'Group 1',
+          options: [
+            { value: 'option1', label: 'Option 1' },
+            { value: 'option2', label: 'Option 2', selected: true }
+          ]
+        },
+        {
+          label: 'Group 2',
+          options: [
+            { value: 'option3', label: 'Option 3', disabled: true },
+            { value: 'option4', label: 'Option 4' }
+          ]
+        }
+      ]
+    })
+    createSelectra('#selectPopulatedGroupsMultiple', {
+      options: [
+        {
+          label: 'Group 1',
+          options: [
+            { value: 'option1', label: 'Option 1', selected: true },
+            { value: 'option2', label: 'Option 2', selected: true }
+          ]
+        },
+        {
+          label: 'Group 2',
+          options: [
+            { value: 'option3', label: 'Option 3', disabled: true },
+            { value: 'option4', label: 'Option 4' }
+          ]
+        }
+      ]
     })
   </script>
 </body>
