@@ -83,6 +83,12 @@
   border-radius: var(--selectra-options-border-radius);
 }
 
+.selectra-option[data-disabled='true'] {
+  background: #fff;
+  color: #999;
+  cursor: not-allowed;
+}
+
 .selectra-btn,
 .selectra-input {
   cursor: pointer;
@@ -99,6 +105,10 @@
 
 .selectra-handler {
   padding-right: 2rem;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .selectra-handler-icon {

@@ -13,7 +13,8 @@ class SelectraElement {
   ) {
     this.search = search
     this.element = element
-    this.multiple = element.hasAttribute('multiple')
+    this.multiple = element.multiple
+    this.disabled = element.disabled
     this.classes = Array.from(this.element.classList)
 
     // Translations
@@ -56,7 +57,26 @@ class SelectraElement {
     this.customSelector.insertAdjacentHTML('afterbegin', `
       <div class="selectra-options">${this.getOptionsHTML()}</div>
       <div class="selectra-handler-container">
-        ${this.search ? (`<input class="${[...this.classes, 'selectra-handler', 'selectra-input'].join(' ')}" placeholder="${this.langInputPlaceholder}" value="${this.getCurrentLabel()}" />`) : (`<button type="button" class="${[...this.classes, 'selectra-handler', 'selectra-btn'].join(' ')}">${this.getCurrentLabel()}</button>`)}
+        ${
+          this.search
+          ? (
+            `<input
+              class="${[...this.classes, 'selectra-handler', 'selectra-input'].join(' ')}" 
+              ${this.disabled ? 'disabled' : ''} 
+              placeholder="${this.langInputPlaceholder}" 
+              value="${this.getCurrentLabel()}" 
+            />`
+          )
+          : (
+            `<button
+              type="button"
+              class="${[...this.classes, 'selectra-handler', 'selectra-btn'].join(' ')}" 
+              ${this.disabled ? 'disabled' : ''}
+            >
+              ${this.getCurrentLabel()}
+            </button>`
+          )
+        }
         <span class="selectra-handler-icon">${dropdown}</span>
       </div>
     `)
@@ -102,7 +122,7 @@ class SelectraElement {
   }
 
   optionsListener () {
-    this.options.querySelectorAll('.selectra-option').forEach(option => {
+    this.options.querySelectorAll('.selectra-option:not([data-disabled="true"])').forEach(option => {
       option.addEventListener('click', () => {
         this.selectValue(option.dataset.value)
       })
@@ -193,7 +213,7 @@ class SelectraElement {
         `
       } else {
         html += `
-          <div class="selectra-option" data-value="${option.value}" data-selected="${option.selected}">
+          <div class="selectra-option" data-value="${option.value}" data-selected="${option.selected}" data-disabled="${option.disabled}">
             ${option.label}
             ${option.selected && this.multiple ? '<span class="selectra-option-icon">' + trash + '</span>' : ''}
           </div>`
@@ -211,7 +231,8 @@ class SelectraElement {
         options.push({
           value: optionElement.getAttribute('value'),
           label: optionElement.innerHTML,
-          selected: this.multiple ? optionElement.hasAttribute('selected') : this.element.value === optionElement.getAttribute('value')
+          selected: this.multiple ? optionElement.selected : this.element.value === optionElement.getAttribute('value'),
+          disabled: !!optionElement.disabled
         })
       } else if (!flat && optionElement.tagName === 'OPTGROUP') {
         // Opt group

@@ -3,7 +3,7 @@ import { createSelectra } from '../src/index'
 describe('simple select', () => {
   beforeEach(() => {
     document.body.innerHTML = `
-      <select id="test-select"><option value="option1">Option 1</option><option value="option2">Option 2</option></select>
+      <select id="test-select"><option value="option1">Option 1</option><option value="option2">Option 2</option><option value="option3" disabled>Option 3</option></select>
     `
     createSelectra('#test-select')
   })
@@ -16,7 +16,7 @@ describe('simple select', () => {
     expect(selectraContainer.querySelector('.selectra-handler')).not.toBeNull()
     expect(selectraOptions).not.toBeNull()
     expect(selectraOptions.classList.contains('open')).toBe(false)
-    expect(selectraContainer.querySelectorAll('.selectra-option').length).toBe(2)
+    expect(selectraContainer.querySelectorAll('.selectra-option').length).toBe(3)
   })
   
   test('focus on select component and see if options open', () => {
@@ -37,6 +37,12 @@ describe('simple select', () => {
     expect(document.querySelectorAll('.selectra-option').length).toBe(1)
     expect(document.querySelector('.selectra-option[data-value="option1"]')).not.toBeNull()
     expect(document.querySelector('.selectra-option[data-value="option2"]')).toBeNull()
+  })
+
+  test('click on disabled option', () => {
+    document.querySelector('#test-select').focus()
+    document.querySelector('.selectra-option[data-value="option3"]').click()
+    expect(document.querySelector('#test-select').val()).toBe('option1')
   })
 })
 
@@ -145,5 +151,36 @@ describe('optgroup select multiple', () => {
     document.querySelector('.selectra-option[data-value="option2"]').click()
     document.querySelector('.selectra-option[data-value="option1"]').click()
     expect(document.querySelector('#test-select').val()).toStrictEqual(['option2'])
+  })
+})
+
+describe('disabled select without search', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <select id="test-select" multiple disabled><optgroup label="All options"><option value="option1">Option 1</option><option value="option2">Option 2</option></optgroup></select>
+    `
+    createSelectra('#test-select')
+  })
+
+  test('disabled select, check if on click if it opens', () => {
+    document.querySelector('#test-select').focus()
+    expect(document.querySelector('.selectra-options').classList.contains('open')).toBe(false)
+  })
+})
+
+
+describe('disabled select with search', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <select id="test-select" multiple disabled><optgroup label="All options"><option value="option1">Option 1</option><option value="option2">Option 2</option></optgroup></select>
+    `
+    createSelectra('#test-select', {
+      search: true
+    })
+  })
+
+  test('disabled select, check if on click if it opens', () => {
+    document.querySelector('#test-select').focus()
+    expect(document.querySelector('.selectra-options').classList.contains('open')).toBe(false)
   })
 })

@@ -18,6 +18,7 @@
           <option value="M" selected>Male</option>
           <option value="F">Female</option>
           <option value="X">X</option>
+          <option value="disabled" disabled>Disabled</option>
         </select>
       </p>
       <p>
@@ -35,7 +36,7 @@
             <option value="cat7">Category 7</option>
             <option value="cat8">Category 8</option>
             <option value="cat9">Category 9</option>
-            <option value="cat10">Category 10</option>
+            <option value="cat10" disabled>Category 10</option>
             <option value="cat11">Category 11</option>
             <option value="cat12">Category 12</option>
             <option value="cat13">Category 13</option>
@@ -50,7 +51,20 @@
             <option value="cat2" selected>Category 2</option>
           </optgroup>
           <optgroup label="Inactive categories">
-            <option value="cat3">Category 3</option>
+            <option value="cat3" disabled>Category 3</option>
+            <option value="cat4">Category 4</option>
+          </optgroup>
+        </select>
+      </p>
+      <p>
+        <label for="selectCustomDisabled">Disabled input</label>
+        <select name="" id="selectCustomDisabled" class="form-control" required multiple disabled>
+          <optgroup label="Active categories">
+            <option value="cat1" selected>Category 1</option>
+            <option value="cat2" selected>Category 2</option>
+          </optgroup>
+          <optgroup label="Inactive categories">
+            <option value="cat3" disabled>Category 3</option>
             <option value="cat4">Category 4</option>
           </optgroup>
         </select>
@@ -74,6 +88,13 @@
 
     // Selectra by function
     createSelectra('#selectCustomMultiple', {
+      search: true,
+      langInputPlaceholder: 'Search a category',
+      langEmptyValuePlaceholder: 'Choose one or more categories'
+    })
+
+    // Selectra by function
+    createSelectra('#selectCustomDisabled', {
       search: true,
       langInputPlaceholder: 'Search a category',
       langEmptyValuePlaceholder: 'Choose one or more categories'
