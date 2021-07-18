@@ -1,16 +1,28 @@
 import SelectraElement from './SelectraElement'
 
 class Selectra {
-  constructor (selector, config = {}) {
+  constructor (selectorOrElements, config = {}) {
     this.config = config
-    this.selector = selector
+    this.selectorOrElements = selectorOrElements
   }
 
   init () {
-    document.querySelectorAll(this.selector).forEach(element => {
-      const selectraElement = new SelectraElement(element, this.config)
-      selectraElement.init()
-    })
+    if (typeof this.selectorOrElements === 'string') {
+      document.querySelectorAll(this.selectorOrElements).forEach(element => {
+        const selectraElement = new SelectraElement(element, this.config)
+        selectraElement.init()
+      })
+    } else {
+      if (this.selectorOrElements instanceof HTMLElement) {
+        const selectraElement = new SelectraElement(this.selectorOrElements, this.config)
+        selectraElement.init()
+      } else {
+        for (const element of Array.from(this.selectorOrElements)) {
+          const selectraElement = new SelectraElement(element, this.config)
+          selectraElement.init()
+        }
+      }
+    }
   }
 }
 

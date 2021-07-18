@@ -1,14 +1,19 @@
 import Selectra from './Selectra'
-import { escape, unescape } from 'html-escaper'
 
-export const createSelectra = (selector, config = {}) => {
-  const selectraInstance = new Selectra(selector, config)
+export const createSelectra = (selectorOrElements, config = {}) => {
+  const selectraInstance = new Selectra(selectorOrElements, config)
   selectraInstance.init()
 }
+
+// Create web component
+class SelectraComponent extends HTMLSelectElement {
+  constructor () {
+    super()
+    createSelectra(this)
+  }
+}
+customElements.define('selectra-input', SelectraComponent, { extends: 'select' })
 
 // Bind to window
 window.Selectra = Selectra
 window.createSelectra = createSelectra
-
-window.escape = escape
-window.unescape = unescape
