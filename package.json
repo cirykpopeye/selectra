@@ -41,6 +41,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@popperjs/core": "^2.9.2"
+    "@popperjs/core": "^2.9.2",
+    "html-escaper": "^3.0.3"
   }
 }

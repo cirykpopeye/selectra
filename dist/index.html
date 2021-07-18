@@ -97,8 +97,7 @@
         <p>
           <label for="vueCategories">Categories</label>
           <select id="vueCategories" class="form-control" v-model="values" multiple>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
+            <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
           </select>
           {{ values }}
         </p>
@@ -136,8 +135,8 @@
     createSelectra('#selectPopulated', {
       options: [
         {
-          value: 'option1',
-          label: 'Option 1'
+          value: '<">option1',
+          label: '> "Option 1"'
         },
         {
           value: 'option2',
@@ -155,13 +154,14 @@
         }
       ]
     })
+    
     createSelectra('#selectPopulatedGroups', {
       options: [
         {
           label: 'Group 1',
           options: [
-            { value: 'option1', label: 'Option 1' },
-            { value: 'option2', label: 'Option 2', selected: true }
+            { value: '<option1', label: '> Option 1' },
+            { value: '<">option2', label: '> testOption 2', selected: true }
           ]
         },
         {
@@ -202,7 +202,11 @@
       data () {
         return {
           value: false,
-          values: ['option1', 'option2']
+          values: ['option1', 'option2'],
+          options: [
+            { value: 'option1', label: '> Option 1' },
+            { value: 'option2', label: '> Option 2' }
+          ]
         }
       }
     })

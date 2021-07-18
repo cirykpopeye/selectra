@@ -1,4 +1,5 @@
 import { createPopper } from '@popperjs/core'
+import { unescape } from 'html-escaper'
 import dropdown from './assets/dropdown.svg'
 import trash from './assets/trash.svg'
 
@@ -18,6 +19,20 @@ class SelectraElement {
     this.disabled = element.disabled
     this.classes = Array.from(this.element.classList)
     this.options = options
+      ? options.map(option => {
+        option.label = escape(option.label)
+        if ('options' in option) {
+          options.options = option.options.map(groupOption => {
+            groupOption.label = escape(groupOption.label)
+            groupOption.value = escape(groupOption.value)
+            return groupOption
+          })
+        } else {
+          option.value = escape(option.value)
+        }
+        return option
+      })
+      : options
 
     // Translations
     this.langInputPlaceholder = langInputPlaceholder
@@ -54,7 +69,7 @@ class SelectraElement {
 
   addGroup (group) {
     const groupElement = document.createElement('optgroup')
-    groupElement.setAttribute('label', group.label)
+    groupElement.setAttribute('label', unescape(group.label))
     for (const option of group.options) {
       this.addOption(groupElement, option)
     }
@@ -67,7 +82,7 @@ class SelectraElement {
   addOption (element, option) {
     element.insertAdjacentHTML(
       'beforeend',
-      `<option value="${option.value}" ${option.selected ? 'selected' : ''} ${option.disabled ? 'disabled' : ''}>${option.label}</option>`
+      `<option value="${escape(option.value)}" ${option.selected ? 'selected' : ''} ${option.disabled ? 'disabled' : ''}>${escape(option.label)}</option>`
     )
   }
 
@@ -86,7 +101,7 @@ class SelectraElement {
     if (this.multiple) {
       return Array.from(this.element.options).filter(option => option.selected).map(selectedOption => selectedOption.value)
     }
-    return this.element.value
+    return unescape(this.element.value)
   }
 
   setValue (val) {
@@ -230,7 +245,7 @@ class SelectraElement {
         this.element.querySelector('option[value="' + value + '"]').selected = true
       }
     } else {
-      this.element.value = value
+      this.element.value = escape(value)
     }
     this.element.dispatchEvent(new Event('change'))
     this.setCurrentLabel()
@@ -242,13 +257,13 @@ class SelectraElement {
     const value = this.getValue()
     if (this.multiple && value.length) {
       return Array.from(this.element.options).filter(option => {
-        return value.includes(option.value)
-      }).map(option => option.innerHTML).join(', ')
+        return value.includes(unescape(option.value))
+      }).map(option => unescape(option.innerHTML)).join(', ')
     } else {
       const option = options.find(option => {
-        return option.value === value
+        return unescape(option.value) === value
       })
-      if (option) return option.label
+      if (option) return unescape(option.label)
     }
     return this.langEmptyValuePlaceholder
   }
@@ -299,7 +314,7 @@ class SelectraElement {
       if (optionElement.tagName === 'OPTION') {
         options.push({
           value: optionElement.value,
-          label: optionElement.innerHTML,
+          label: unescape(optionElement.innerHTML),
           selected: this.multiple ? optionElement.selected : this.element.value === optionElement.value,
           disabled: !!optionElement.disabled
         })
