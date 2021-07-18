@@ -19,20 +19,6 @@ class SelectraElement {
     this.disabled = element.disabled
     this.classes = Array.from(this.element.classList)
     this.options = options
-      ? options.map(option => {
-        option.label = escape(option.label)
-        if ('options' in option) {
-          options.options = option.options.map(groupOption => {
-            groupOption.label = escape(groupOption.label)
-            groupOption.value = escape(groupOption.value)
-            return groupOption
-          })
-        } else {
-          option.value = escape(option.value)
-        }
-        return option
-      })
-      : options
 
     // Translations
     this.langInputPlaceholder = langInputPlaceholder
@@ -83,7 +69,7 @@ class SelectraElement {
     optionElement.value = escape(option.value)
     optionElement.selected = !!option.selected
     optionElement.disabled = !!option.disabled
-    optionElement.innerHTML = escape(option.label)
+    optionElement.innerHTML = option.label
     fragment.appendChild(optionElement)
   }
 
@@ -246,7 +232,7 @@ class SelectraElement {
         this.element.querySelector('option[value="' + value + '"]').selected = true
       }
     } else {
-      this.element.value = escape(value)
+      this.element.value = value
     }
     this.element.dispatchEvent(new Event('change'))
     this.setCurrentLabel()
