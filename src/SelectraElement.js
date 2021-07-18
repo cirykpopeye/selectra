@@ -50,15 +50,17 @@ class SelectraElement {
   }
 
   addOptions () {
+    const fragment = new DocumentFragment()
     if (this.options) {
       for (const option of this.options) {
         if ('options' in option) {
-          this.addGroup(option)
+          this.addGroup(fragment, option)
         } else {
-          this.addOption(this.element, option)
+          this.addOption(fragment, option)
         }
       }
     }
+    this.element.appendChild(fragment)
   }
 
   markAsSelected () {
@@ -67,23 +69,21 @@ class SelectraElement {
     })
   }
 
-  addGroup (group) {
+  addGroup (fragment, group) {
     const groupElement = document.createElement('optgroup')
     groupElement.setAttribute('label', unescape(group.label))
     for (const option of group.options) {
       this.addOption(groupElement, option)
     }
-    this.element.insertAdjacentElement(
-      'beforeend',
-      groupElement
-    )
+    fragment.appendChild(groupElement)
   }
 
-  addOption (element, option) {
-    element.insertAdjacentHTML(
-      'beforeend',
-      `<option value="${escape(option.value)}" ${option.selected ? 'selected' : ''} ${option.disabled ? 'disabled' : ''}>${escape(option.label)}</option>`
-    )
+  addOption (fragment, option) {
+    const optionElement = document.createElement('option')
+    optionElement.value = escape(option.value)
+    optionElement.selected = !!option.selected
+    optionElement.innerHTML = escape(option.label)
+    fragment.appendChild(optionElement)
   }
 
   adaptColors () {
@@ -129,7 +129,7 @@ class SelectraElement {
 
   addCustomSelector () {
     this.customSelector = document.createElement('div')
-    this.customSelector.insertAdjacentHTML('afterbegin', `
+    this.customSelector.innerHTML('afterbegin', `
       <div class="selectra-options">${this.getOptionsHTML()}</div>
       <div class="selectra-handler-container">
         ${
