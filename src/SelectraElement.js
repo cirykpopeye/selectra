@@ -82,6 +82,7 @@ class SelectraElement {
     const optionElement = document.createElement('option')
     optionElement.value = escape(option.value)
     optionElement.selected = !!option.selected
+    optionElement.disabled = !!option.disabled
     optionElement.innerHTML = escape(option.label)
     fragment.appendChild(optionElement)
   }
@@ -129,7 +130,7 @@ class SelectraElement {
 
   addCustomSelector () {
     this.customSelector = document.createElement('div')
-    this.customSelector.innerHTML('afterbegin', `
+    this.customSelector.innerHTML = `
       <div class="selectra-options">${this.getOptionsHTML()}</div>
       <div class="selectra-handler-container">
         ${
@@ -154,7 +155,7 @@ class SelectraElement {
         }
         <span class="selectra-handler-icon">${dropdown}</span>
       </div>
-    `)
+    `
     this.customSelector.classList.add('selectra-container')
     this.element.insertAdjacentElement('afterend', this.customSelector)
     this.handlerContainer = this.customSelector.querySelector('.selectra-handler-container')
