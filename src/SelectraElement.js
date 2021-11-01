@@ -301,7 +301,7 @@ class SelectraElement {
       if (optionElement.tagName === 'OPTION') {
         options.push({
           value: optionElement.value,
-          label: unescape(optionElement.innerHTML),
+          label: unescape(optionElement.innerHTML.trim()),
           selected: this.multiple ? optionElement.selected : this.element.value === optionElement.value,
           disabled: !!optionElement.disabled
         })
