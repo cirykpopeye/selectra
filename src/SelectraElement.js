@@ -170,7 +170,7 @@ class SelectraElement {
   }
 
   addShowHideListener () {
-    this.element.addEventListener('focus', () => {
+    this.element.addEventListener('click', () => {
       this.handler.focus()
     })
     this.handler.addEventListener('focus', () => {
