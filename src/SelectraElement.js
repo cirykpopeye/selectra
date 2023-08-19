@@ -251,7 +251,6 @@ class SelectraElement {
         return true
       }
 
-
       if (this.multiple) {
         const options = Array.from(this.optionsElement.querySelectorAll('.selectra-option'))
 
@@ -275,7 +274,7 @@ class SelectraElement {
           else activeIndex = 0
         }
 
-        let nextOption = options[activeIndex]
+        const nextOption = options[activeIndex]
         if (nextOption) nextOption.setAttribute('data-active', true)
       } else {
         const options = this.getOptions(this.element, true)

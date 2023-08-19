@@ -10,3 +10,7 @@
 ## 1.0.10
 - Fix broken tests
 - Fix disabled input
+
+### 1.0.11
+- Fix broken import
+- Fix stylelint en eslint issues

@@ -69,9 +69,9 @@
 }
 
 .selectra-option {
+  border-radius: var(--selectra-options-border-radius);
   margin-bottom: 4px;
   padding: 0.3rem 1rem;
-  border-radius: var(--selectra-options-border-radius);
 }
 
 .selectra-option[data-selected=true],
@@ -121,9 +121,9 @@
 }
 
 .selectra-option {
+  border: 2px solid transparent;
   padding-right: 2rem;
   position: relative;
-  border: 2px solid transparent;
 }
 
 .selectra-option-icon {
