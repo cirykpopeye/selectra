@@ -4,7 +4,7 @@ const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = (env, argv) => {
   const config = {
-    entry: ['./src/index.js', './src/scss/index.scss'],
+    entry: ['./src/selectra.dist.js', './src/scss/index.scss'],
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'selectra.min.js'

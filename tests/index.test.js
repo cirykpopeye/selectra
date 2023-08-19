@@ -20,18 +20,18 @@ describe('simple select', () => {
   })
   
   test('focus on select component and see if options open', () => {
-    document.querySelector('#test-select').focus()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
     expect(document.querySelector('.selectra-options').classList.contains('open')).toBe(true)
   })
   
   test('focus on select, and click on option', () => {
-    document.querySelector('#test-select').focus()
-    document.querySelector('.selectra-option[data-value="option2"]').click()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
+    document.querySelector('.selectra-option[data-value="option2"]').dispatchEvent(new Event('mouseup'))
     expect(document.querySelector('#test-select').val()).toBe('option2')
   })
   
   test('filter by text', () => {
-    document.querySelector('#test-select').focus()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
     document.querySelector('.selectra-handler').value = 'option 1'
     document.querySelector('.selectra-handler').dispatchEvent(new Event('input'))
     expect(document.querySelectorAll('.selectra-option').length).toBe(1)
@@ -40,8 +40,8 @@ describe('simple select', () => {
   })
 
   test('click on disabled option', () => {
-    document.querySelector('#test-select').focus()
-    document.querySelector('.selectra-option[data-value="option3"]').click()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
+    document.querySelector('.selectra-option[data-value="option3"]').dispatchEvent(new Event('mouseup'))
     expect(document.querySelector('#test-select').val()).toBe('option1')
   })
 })
@@ -68,18 +68,18 @@ describe('simple select with search', () => {
   })
   
   test('focus on select component and see if options open', () => {
-    document.querySelector('#test-select').focus()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
     expect(document.querySelector('.selectra-options').classList.contains('open')).toBe(true)
   })
   
   test('focus on select, and click on option', () => {
-    document.querySelector('#test-select').focus()
-    document.querySelector('.selectra-option[data-value="option2"]').click()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
+    document.querySelector('.selectra-option[data-value="option2"]').dispatchEvent(new Event('mouseup'))
     expect(document.querySelector('#test-select').val()).toBe('option2')
   })
   
   test('filter by text', () => {
-    document.querySelector('#test-select').focus()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
     document.querySelector('.selectra-handler').value = 'option 1'
     document.querySelector('.selectra-handler').dispatchEvent(new Event('input'))
     expect(document.querySelectorAll('.selectra-option').length).toBe(1)
@@ -111,7 +111,7 @@ describe('optgroup select', () => {
   })
   
   test('filter by text', () => {
-    document.querySelector('#test-select').focus()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
     document.querySelector('.selectra-handler').value = 'option 1'
     document.querySelector('.selectra-handler').dispatchEvent(new Event('input'))
     expect(document.querySelectorAll('.selectra-option').length).toBe(1)
@@ -133,23 +133,23 @@ describe('optgroup select multiple', () => {
   })
 
   test('focus on select, and click on option', () => {
-    document.querySelector('#test-select').focus()
-    document.querySelector('.selectra-option[data-value="option2"]').click()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
+    document.querySelector('.selectra-option[data-value="option2"]').dispatchEvent(new Event('mouseup'))
     expect(document.querySelector('#test-select').val()).toStrictEqual(['option2'])
   })
 
   test('focus on select, and click on both option', () => {
-    document.querySelector('#test-select').focus()
-    document.querySelector('.selectra-option[data-value="option1"]').click()
-    document.querySelector('.selectra-option[data-value="option2"]').click()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
+    document.querySelector('.selectra-option[data-value="option1"]').dispatchEvent(new Event('mouseup'))
+    document.querySelector('.selectra-option[data-value="option2"]').dispatchEvent(new Event('mouseup'))
     expect(document.querySelector('#test-select').val()).toStrictEqual(['option1', 'option2'])
   })
 
   test('focus on select, and click on both option, unclick an option', () => {
-    document.querySelector('#test-select').focus()
-    document.querySelector('.selectra-option[data-value="option1"]').click()
-    document.querySelector('.selectra-option[data-value="option2"]').click()
-    document.querySelector('.selectra-option[data-value="option1"]').click()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
+    document.querySelector('.selectra-option[data-value="option1"]').dispatchEvent(new Event('mouseup'))
+    document.querySelector('.selectra-option[data-value="option2"]').dispatchEvent(new Event('mouseup'))
+    document.querySelector('.selectra-option[data-value="option1"]').dispatchEvent(new Event('mouseup'))
     expect(document.querySelector('#test-select').val()).toStrictEqual(['option2'])
   })
 })
@@ -163,7 +163,7 @@ describe('disabled select without search', () => {
   })
 
   test('disabled select, check if on click if it opens', () => {
-    document.querySelector('#test-select').focus()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
     expect(document.querySelector('.selectra-options').classList.contains('open')).toBe(false)
   })
 })
@@ -180,7 +180,7 @@ describe('disabled select with search', () => {
   })
 
   test('disabled select, check if on click if it opens', () => {
-    document.querySelector('#test-select').focus()
+    document.querySelector('#test-select').dispatchEvent(new Event('mousedown'))
     expect(document.querySelector('.selectra-options').classList.contains('open')).toBe(false)
   })
 })

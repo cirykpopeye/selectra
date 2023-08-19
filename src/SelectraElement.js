@@ -173,20 +173,23 @@ class SelectraElement {
   }
 
   addShowHideListener () {
-    this.element.addEventListener('focus', () => {
-      this.showOptions()
-      // Close all the others
-      document.querySelectorAll('.selectra-element').forEach(el => {
-        if (el !== this.element) el.dispatchEvent(new Event('close'))
-      })
-    })
-    this.handler.addEventListener('mousedown', () => {
+    const openOptions = () => {
+      if (this.element.disabled) return false
       this.showOptions()
 
       // Close all the others
       document.querySelectorAll('.selectra-element').forEach(el => {
         if (el !== this.element) el.dispatchEvent(new Event('close'))
       })
+    }
+    this.element.addEventListener('focus', () => {
+      openOptions()
+    })
+    this.element.addEventListener('mousedown', () => {
+      openOptions()
+    })
+    this.handler.addEventListener('mousedown', () => {
+      openOptions()
     })
     this.element.addEventListener('close', () => {
       this.hideOptions()
@@ -325,6 +328,10 @@ class SelectraElement {
         this.optionsElement.querySelector('.selectra-option[data-value="' + value + '"]').dataset.selected = true
       }
     } else {
+      // Check if option is disabled yes or no
+      const option = this.options[this.options.findIndex(option => option.value === value)]
+      if (option && option.disabled) return false
+
       this.element.value = value
       // Deselect all
       this.optionsElement.querySelectorAll('.selectra-option').forEach(option => {
