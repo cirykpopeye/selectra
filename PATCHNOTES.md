@@ -14,3 +14,6 @@
 ### 1.0.11
 - Fix broken import
 - Fix stylelint en eslint issues
+
+### 1.0.12
+- Fix issue findIndex and options being false
