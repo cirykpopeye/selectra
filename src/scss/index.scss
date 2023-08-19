@@ -10,6 +10,7 @@
   --selectra-options-scrollbar-thumb-hover-color: #{$selectra-options-scrollbar-thumb-hover-color};
   --selectra-options-shadow: #{$selectra-options-shadow};
   --selectra-options-border-radius: #{$selectra-options-border-radius};
+  --selectra-options-animation-duration: 300ms;
 }
 
 .selectra-element {
@@ -46,7 +47,7 @@
   overflow-y: scroll;
   padding: 1rem;
   pointer-events: none;
-  transition: 300ms ease-in-out;
+  transition: var(--selectra-options-animation-duration) ease-in-out;
   width: 100%;
   z-index: 1;
 
@@ -75,12 +76,12 @@
 .selectra-option {
   margin-bottom: 4px;
   padding: 0.3rem 1rem;
+  border-radius: var(--selectra-options-border-radius);
 }
 
 .selectra-option[data-selected='true'],
 .selectra-option:hover {
   background: #ddd;
-  border-radius: var(--selectra-options-border-radius);
 }
 
 .selectra-option[data-disabled='true'] {
@@ -116,7 +117,7 @@
   position: absolute;
   right: 0.5rem;
   top: 5px;
-  transition: 300ms ease-in-out;
+  transition: var(--selectra-options-animation-duration) ease-in-out;
   width: 20px;
 }
 
@@ -127,6 +128,7 @@
 .selectra-option {
   padding-right: 2rem;
   position: relative;
+  border: 2px solid transparent;
 }
 
 .selectra-option-icon {
@@ -135,7 +137,7 @@
   right: 0.5rem;
   top: 3px;
   transform: translateX(10px);
-  transition: 300ms ease-in-out;
+  transition: var(--selectra-options-animation-duration) ease-in-out;
   width: 20px;
 }
 
@@ -146,4 +148,8 @@
 
 .selectra-handler-icon svg {
   fill: inherit;
+}
+
+.selectra-option[data-active="true"] {
+  border: 2px solid #ccc;
 }

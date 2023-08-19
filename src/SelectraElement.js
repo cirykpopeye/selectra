@@ -10,6 +10,7 @@ class SelectraElement {
       search = false,
       langInputPlaceholder = 'Search',
       langEmptyValuePlaceholder = 'Pick a value',
+      langOptionsEmptyPlaceholder = 'There are no more options',
       options = false
     }
   ) {
@@ -23,6 +24,7 @@ class SelectraElement {
     // Translations
     this.langInputPlaceholder = langInputPlaceholder
     this.langEmptyValuePlaceholder = langEmptyValuePlaceholder
+    this.langOptionsEmptyPlaceholder = langOptionsEmptyPlaceholder
   }
 
   init () {
@@ -167,14 +169,27 @@ class SelectraElement {
     this.addShowHideListener()
     this.optionsListener()
     this.filterListener()
+    this.keysListener()
   }
 
   addShowHideListener () {
     this.element.addEventListener('focus', () => {
-      this.handler.focus()
-    })
-    this.handler.addEventListener('focus', () => {
       this.showOptions()
+      // Close all the others
+      document.querySelectorAll('.selectra-element').forEach(el => {
+        if (el !== this.element) el.dispatchEvent(new Event('close'))
+      })
+    })
+    this.handler.addEventListener('mousedown', () => {
+      this.showOptions()
+
+      // Close all the others
+      document.querySelectorAll('.selectra-element').forEach(el => {
+        if (el !== this.element) el.dispatchEvent(new Event('close'))
+      })
+    })
+    this.element.addEventListener('close', () => {
+      this.hideOptions()
     })
     document.addEventListener('click', e => {
       if (!e.composedPath().includes(this.customSelector)) {
@@ -185,7 +200,7 @@ class SelectraElement {
 
   optionsListener () {
     this.optionsElement.querySelectorAll('.selectra-option:not([data-disabled="true"])').forEach(option => {
-      option.addEventListener('click', () => {
+      option.addEventListener('mouseup', () => {
         this.selectValue(option.dataset.value)
       })
     })
@@ -204,18 +219,95 @@ class SelectraElement {
         if ('options' in option) return option.options.length > 0
         return option.label.toLowerCase().trim().includes(this.handler.value.toLowerCase().trim())
       })
-      this.optionsElement.innerHTML = this.getOptionsHTML(options)
+      if (options.length === 0) {
+        this.optionsElement.innerHTML = this.langOptionsEmptyPlaceholder
+      } else {
+        this.optionsElement.innerHTML = this.getOptionsHTML(options)
+      }
       this.optionsListener()
     })
   }
 
-  selectValue (value) {
+  keysListener () {
+    document.addEventListener('keydown', (e) => {
+      if (!['ArrowUp', 'ArrowDown', 'Enter', 'Space'].includes(e.code)) return true
+      if (!this.isOpen()) return true
+
+      e.preventDefault()
+
+      if (e.code === 'Enter') {
+        if (this.element.value) this.hideOptions()
+        return true
+      }
+
+      if (e.code === 'Space' && this.multiple) {
+        const activeOption = this.optionsElement.querySelector('.selectra-option[data-active="true"]')
+        if (!activeOption) return true
+
+        this.selectValue(activeOption.dataset.value, false)
+        return true
+      }
+
+
+      if (this.multiple) {
+        const options = Array.from(this.optionsElement.querySelectorAll('.selectra-option'))
+
+        // Do not auto select, only when using space bar
+        let activeIndex = -1
+        const activeOption = options.find(option => option.getAttribute('data-active') === 'true')
+        if (activeOption) {
+          activeIndex = options.indexOf(activeOption)
+        }
+
+        // Disable all
+        options.forEach(option => {
+          option.setAttribute('data-active', false)
+        })
+
+        if (e.code === 'ArrowUp') {
+          if (options[activeIndex - 1]) activeIndex = activeIndex - 1
+          else activeIndex = options.length - 1
+        } else {
+          if (options[activeIndex + 1]) activeIndex = activeIndex + 1
+          else activeIndex = 0
+        }
+
+        let nextOption = options[activeIndex]
+        if (nextOption) nextOption.setAttribute('data-active', true)
+      } else {
+        const options = this.getOptions(this.element, true)
+
+        if (this.element.value) {
+          // Select the next one
+          const currentIndex = options.findIndex(option => option.value === this.element.value)
+          if (currentIndex + (e.code === 'ArrowUp' ? -1 : 1) < options.length && currentIndex + (e.code === 'ArrowUp' ? -1 : 1) > -1) {
+            this.selectValue(options[currentIndex + (e.code === 'ArrowUp' ? -1 : 1)].value, false)
+          } else if (e.code === 'ArrowUp') {
+            // Select the last one
+            if (options.length) this.selectValue(options[options.length - 1].value, false)
+          } else {
+            // Select the first one
+            if (options.length) this.selectValue(options[0].value, false)
+          }
+        } else if (e.code === 'ArrowUp') {
+          // Select the first one
+          if (options.length) this.selectValue(options[options.length - 1].value, false)
+        } else {
+          // Select the first one
+          if (options.length) this.selectValue(options[0].value, false)
+        }
+      }
+    })
+  }
+
+  selectValue (value, closeOnSelect = true) {
     // Get current value
     const currentValue = this.multiple ? [...this.getValue()] : this.getValue()
     if (this.multiple) {
       // Remove selected from all of the items
       Array.from(this.element.options).forEach((option) => {
         option.selected = false
+        this.optionsElement.querySelector('.selectra-option[data-value="' + value + '"]').dataset.selected = false
       })
 
       // Find value in currentValue
@@ -230,13 +322,19 @@ class SelectraElement {
       // Add selected for remaining items
       for (const value of currentValue) {
         this.element.querySelector('option[value="' + value + '"]').selected = true
+        this.optionsElement.querySelector('.selectra-option[data-value="' + value + '"]').dataset.selected = true
       }
     } else {
       this.element.value = value
+      // Deselect all
+      this.optionsElement.querySelectorAll('.selectra-option').forEach(option => {
+        option.dataset.selected = false
+      })
+      this.optionsElement.querySelector('.selectra-option[data-value="' + value + '"]').dataset.selected = true
     }
     this.element.dispatchEvent(new Event('change'))
     this.setCurrentLabel()
-    this.hideOptions()
+    if (closeOnSelect) this.hideOptions()
   }
 
   getCurrentLabel () {
@@ -257,6 +355,10 @@ class SelectraElement {
 
   setCurrentLabel () {
     this.handler.innerText = this.getCurrentLabel()
+  }
+
+  isOpen () {
+    return this.optionsElement.classList.contains('open')
   }
 
   showOptions () {
