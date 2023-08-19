@@ -328,15 +328,15 @@ class SelectraElement {
       }
     } else {
       // Check if option is disabled yes or no
-      const option = this.options[this.options.findIndex(option => option.value === value)]
-      if (option && option.disabled) return false
+      const optionElement = this.optionsElement.querySelector('.selectra-option[data-value="' + value + '"]')
+      if (optionElement && optionElement.getAttribute('data-disabled') === 'true') return false
 
       this.element.value = value
       // Deselect all
       this.optionsElement.querySelectorAll('.selectra-option').forEach(option => {
         option.dataset.selected = false
       })
-      this.optionsElement.querySelector('.selectra-option[data-value="' + value + '"]').dataset.selected = true
+      optionElement.dataset.selected = true
     }
     this.element.dispatchEvent(new Event('change'))
     this.setCurrentLabel()
