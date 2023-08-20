@@ -1,6 +1,6 @@
 {
   "name": "selectra",
-  "version": "1.0.8",
+  "version": "1.0.12",
   "main": "src/index.js",
   "repository": "https://github.com/cirykpopeye/selectra",
   "author": "Ciryk Popeye",
